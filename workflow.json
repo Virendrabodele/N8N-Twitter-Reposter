@@ -1,0 +1,972 @@
+{
+  "name": "A Dose of Cats",
+  "nodes": [
+    {
+      "parameters": {
+        "text": "={{ $json.myNewlink }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 2,
+      "position": [
+        592,
+        -96
+      ],
+      "id": "e6d45167-86c0-4539-8106-841d92729aee",
+      "name": "Create Tweet",
+      "credentials": {
+        "twitterOAuth2Api": {
+          "id": "iV6sbRtQiMMBXpW",
+          "name": "X A Dose Of Cats"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Lh_-E9Il34rZV51Ju-kZTrKu1t8k4KTxygpd5DtO2w8",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "a_dose_of_cats",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Lh_-E9Il34rZV51Ju-kZTrKu1t8k4KTxygpd5DtO2w8/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        208,
+        -96
+      ],
+      "id": "af5be81e-cae9-4bc7-b17e-cd3328d39dce",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EPgH22gownRhVkdb",
+          "name": "A Dose of Cats"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        400,
+        480
+      ],
+      "id": "ec85b933-6787-41da-8a10-0a684b34fbe3",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1Lh_-E9Il34rZV51Ju-kZTrKu1t8k4KTxygpd5DtO2w8",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "a_dose_of_cats",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Lh_-E9Il34rZV51Ju-kZTrKu1t8k4KTxygpd5DtO2w8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "creator": "={{ $json.creator }}",
+            "title": "={{ $json.title }}",
+            "link": "={{ $json.link }}",
+            "pubDate": "={{ $json.pubDate }}",
+            "dc:creator": "={{ $json['dc:creator'] }}",
+            "content": "={{ $json.content }}",
+            "contentSnippet": "={{ $json.contentSnippet }}",
+            "guid": "={{ $json.guid }}",
+            "isoDate": "={{ $json.isoDate }}",
+            "myNewlink": "={{ $json.myNewlink }}",
+            "type": "={{ $json.type }}",
+            "mediaURLs": "={{ $json.mediaURLs }}"
+          },
+          "matchingColumns": [
+            "myNewlink"
+          ],
+          "schema": [
+            {
+              "id": "creator",
+              "displayName": "creator",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "link",
+              "displayName": "link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pubDate",
+              "displayName": "pubDate",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "dc:creator",
+              "displayName": "dc:creator",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "content",
+              "displayName": "content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "contentSnippet",
+              "displayName": "contentSnippet",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "guid",
+              "displayName": "guid",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "isoDate",
+              "displayName": "isoDate",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "myNewlink",
+              "displayName": "myNewlink",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "type",
+              "displayName": "type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "mediaURLs",
+              "displayName": "mediaURLs",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "useAppend": false
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1712,
+        448
+      ],
+      "id": "f21c849e-c845-469d-aeaa-e763f82c82bd",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EPgH22gownRhVkdb",
+          "name": "A Dose of Cats"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Define the list of usernames\nusernames = [\n      \"catshealdeprsn\",\n      \"literallymecats\",\n      \"CuteAdorableCat\",\n      \"ShouldHaveCat\",\n      \"cutecats_____\",\n      \"literallymecats\",\n      \"CatWorkers\",\n      \"JoyfullCat\",\n      \"OutOfNaturel\",\n      \"catsnkittys\",\n      \"CatPosted\"\n    ]\n\n# Transform the list into the expected format\noutput = [{\"json\": {\"name\": username}} for username in usernames]\n\n# Return the transformed list\nreturn output"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        480
+      ],
+      "id": "fc61bb16-98ce-4ef5-8050-c16f1706314d",
+      "name": " Usernames"
+    },
+    {
+      "parameters": {
+        "url": "=https://rss.xcancel.com/{{ $json.name}}/media/rss",
+        "options": {
+          "ignoreSSL": false
+        }
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        592,
+        656
+      ],
+      "id": "8972028c-83da-477c-b237-50079893bd5f",
+      "name": "Get User Media"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor item in _input.all():\n  domain = \"x.com\"\n  n_d = item.json.guid.split(\"/\")\n  n_d[2] = domain \n  n_d[5] = n_d[5].split(\"#\")[0]\n\n  n_d = \"/\".join(n_d) + \"/video/1\"\n# return _input.all()\n# return bd\n  item.json.myNewlink = n_d\nreturn _input.all()"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        656
+      ],
+      "id": "633ed67d-47fe-40b4-b265-52f80901e32c",
+      "name": "Add Custom URL"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 12
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        480
+      ],
+      "id": "9c5e887b-70c6-4527-ac64-dd880efe4d5f",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "import random\nitems = _input.all()\nrandom.shuffle(items)\nreturn items[0]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        -96
+      ],
+      "id": "17750138-9848-494b-897a-5bf8c595dc82",
+      "name": "Random Pick"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 2,
+              "triggerAtMinute": "={{ Math.floor(Math.random() * 60) }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        -96
+      ],
+      "id": "e7bebf7c-750e-4a4d-80d3-e89d5ae0df63",
+      "name": "Schedule Trigger1"
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "upload",
+        "title": "={{ $json.title }}",
+        "regionCode": "US",
+        "categoryId": "15",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.youTube",
+      "typeVersion": 1,
+      "position": [
+        1008,
+        112
+      ],
+      "id": "4e2989c7-0cb0-4fc5-a7c5-7235eafe8aee",
+      "name": "Upload a video",
+      "credentials": {
+        "youTubeOAuth2Api": {
+          "id": "Om5SiJBgE3Gx0Hyv",
+          "name": "YouTube account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.myNewlink.replace('https://x.com', 'https://api.vxtwitter.com'); }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        848
+      ],
+      "id": "f9bb67d2-762b-4438-909d-18aa1dc7dae7",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c4565ece-3081-4376-bf75-8504a68487e8",
+              "leftValue": "={{ \n  (\n    ($json.mediaURLs.match(/https?:\\/\\/[^\\s]+\\.mp4/g) || [])\n  ).length > 0\n}}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1920,
+        656
+      ],
+      "id": "8781350a-3663-41ef-939f-d9cef6fa00cb",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "batchSize": 20,
+        "options": {
+          "reset": false
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1008,
+        464
+      ],
+      "id": "d5100b38-5f55-4c8c-a609-e3f83afcd3b3",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor item in _input.all():\n  item.json.type = \"vid\"\nreturn _input.all()"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2128,
+        544
+      ],
+      "id": "f4b30b9e-28e7-43cd-845e-54a4b35f41d3",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor item in _input.all():\n  item.json.type = \"pic\"\nreturn _input.all()"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2144,
+        784
+      ],
+      "id": "706c0140-132d-42bd-aaef-4044264691da",
+      "name": "Code2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2352,
+        656
+      ],
+      "id": "7aa9f8e1-53be-4568-b513-f1b491a75e5b",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Loop over input items and add a new field called 'myNewField' to the JSON of each one\n\nreturn _input.all()[:3]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        592,
+        464
+      ],
+      "id": "0999fa68-aa43-43ea-b271-d578251f6880",
+      "name": "Filter 3 items",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor item in _input.all():\n  domain = \"x.com\"\n  n_d = item.json.tweetURL.replace(\"twitter.com\",domain) + \"/video/1\"\n  \n  # n_d[2] = domain \n  # n_d[5] = n_d[5].split(\"#\")[0]\n\n  # n_d = \"/\".join(n_d) \n# return _input.all()\n# return bd\n  item.json.myNewlink = n_d\n  \nreturn _input.all()"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1376,
+        848
+      ],
+      "id": "fd6ec28d-f1a5-4080-8d04-48eba7ec937b",
+      "name": "Generate newLink"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "conversationID, mediaURLs, tweetID, tweetURL, user_name, myNewlink, user_screen_name",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1552,
+        848
+      ],
+      "id": "3c9c250b-5784-4ee4-aa31-eb3791a78a51",
+      "name": "Remove Unecessary"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "fieldsToMatchString": "myNewlink",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1728,
+        656
+      ],
+      "id": "cfa197f6-82e4-49da-ae26-a233c5c3a619",
+      "name": "Merge metadata"
+    },
+    {
+      "parameters": {
+        "amount": 60
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2592,
+        832
+      ],
+      "id": "c21536ff-6fff-4eb5-bdb0-48291052366e",
+      "name": "Wait",
+      "webhookId": "1ca9182b-3c3f-441e-9e6b-ee191bf4c873"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Lh_-E9Il34rZV51Ju-kZTrKu1t8k4KTxygpd5DtO2w8",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "a_dose_of_cats",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Lh_-E9Il34rZV51Ju-kZTrKu1t8k4KTxygpd5DtO2w8/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        208,
+        112
+      ],
+      "id": "199013fb-9a1a-40e1-88ad-43efc26b5354",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EPgH22gownRhVkdb",
+          "name": "A Dose of Cats"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 2,
+              "triggerAtMinute": "={{ Math.floor(Math.random() * 60) }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        112
+      ],
+      "id": "fa1227d2-3176-4d2f-9003-0b9f4347a985",
+      "name": "Schedule Trigger2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "003c9eda-3aea-4da9-ab92-874be6b9e587",
+              "leftValue": "={{ $json.type }}",
+              "rightValue": "vid",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        400,
+        112
+      ],
+      "id": "ab1dbd7a-c0d2-4f18-8233-ab74717d5524",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.mediaURLs }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        800,
+        112
+      ],
+      "id": "8bd439a5-a4e6-4fe0-a916-5a30442d6c19",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "import random\nitems = _input.all()\nrandom.shuffle(items)\nreturn items[0]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        592,
+        112
+      ],
+      "id": "9de09754-fe43-4371-a17a-e9cf18febf76",
+      "name": "Random Pick1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Random Pick",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Filter 3 items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get User Media",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    " Usernames": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get User Media": {
+      "main": [
+        [
+          {
+            "node": "Add Custom URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Custom URL": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": " Usernames",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Random Pick": {
+      "main": [
+        [
+          {
+            "node": "Create Tweet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Generate newLink",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge metadata",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code2": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter 3 items": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate newLink": {
+      "main": [
+        [
+          {
+            "node": "Remove Unecessary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Unecessary": {
+      "main": [
+        [
+          {
+            "node": "Merge metadata",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge metadata": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger2": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Random Pick1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Random Pick1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Upload a video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "c430a7ae-266a-4da9-8229-7cea7aeb84d9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8b0662228ea078f5c0ea4738adc3f99de3ed66f47aa3f49c4f20bcc7825f78ff"
+  },
+  "id": "a7VMznuoiASLzGm2",
+  "tags": []
+}
